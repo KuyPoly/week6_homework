@@ -29,8 +29,11 @@ class HomeContent extends StatelessWidget {
           ...vm.recentSongs.map((song) => SongTile(
                 song: song,
                 isPlaying: vm.currentSong == song,
-                onTap: () => vm.play(song),
-                onStop: vm.stop,
+                onTap: () {
+                  vm.playerState.currentSong == null
+                      ? vm.playerState.start(song)
+                      : vm.playerState.stop();
+                },
               )),
 
           SizedBox(height: 24),
@@ -42,8 +45,11 @@ class HomeContent extends StatelessWidget {
           ...vm.suggestedSongs.map((song) => SongTile(
                 song: song,
                 isPlaying: vm.currentSong == song,
-                onTap: () => vm.play(song),
-                onStop: vm.stop,
+                onTap: () {
+                  vm.playerState.currentSong == null
+                      ? vm.playerState.start(song)
+                      : vm.playerState.stop();
+                },
               )),
         ],
       ),
@@ -57,13 +63,11 @@ class SongTile extends StatelessWidget {
     required this.song,
     required this.isPlaying,
     required this.onTap,
-    required this.onStop,
   });
 
   final Song song;
   final bool isPlaying;
   final VoidCallback onTap;
-  final VoidCallback onStop;
 
   @override
   Widget build(BuildContext context) {

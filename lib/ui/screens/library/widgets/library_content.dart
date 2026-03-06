@@ -12,9 +12,8 @@ class LibraryContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final vm= context.watch<LibraryViewModel>();
-    final settings = context.watch<AppSettingsState>();
     return Container(
-      color: settings.theme.backgroundColor,
+      color: vm.settingsState.theme.backgroundColor,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
